@@ -35,6 +35,7 @@ namespace ATM
                     Console.WriteLine(ViewBalance());
                     Main();
                     break;
+
                 case 2:
                     Console.Clear();
                     Console.WriteLine("Please enter the amount to be withdrawn");
