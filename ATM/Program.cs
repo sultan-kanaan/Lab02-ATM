@@ -2,23 +2,62 @@
 
 namespace ATM
 {
-    class Program
+     public class Program
     {
-        static public decimal Balance = 100;
+        static public decimal Balance = 1000 ;
+        //static public decimal Amount  ;
 
-
-        static void Main(string[] args)
+        public static void Main()
         {
-            UserInterface();
+            Console.WriteLine(" ________________________________________________");
+            Console.WriteLine("|                                                |");
+            Console.WriteLine("| welcome to MYBANK Please choose the operation :|");
+            Console.WriteLine("|                                                |");
+            Console.WriteLine("| 1. View Balance                                |");
+            Console.WriteLine("| 2. Withdraw                                    |");
+            Console.WriteLine("| 3. Deposit                                     |");
+            Console.WriteLine("| 4. Exit                                        |");
+            Console.WriteLine("|                                                |");
+            Console.WriteLine(" ________________________________________________");
+            int operation = Convert.ToInt32( Console.ReadLine());
+            
+            UserInterface(operation);
            
 
 
         }
-        public static void UserInterface() 
+        public static void UserInterface(int operation) 
         {
-            Console.WriteLine(ViewBalance());
-            Console.WriteLine(Withdraw());
-            Console.WriteLine(Deposit());
+            switch (operation)
+            {
+                case 1:
+                    Console.Clear();
+                    Console.WriteLine(ViewBalance());
+                    Main();
+                    break;
+                case 2:
+                    Console.Clear();
+                    Console.WriteLine("Please enter the amount to be withdrawn");
+                    decimal Amountwithdraw = Convert.ToDecimal(Console.ReadLine());
+                    Console.Write("your Balance is : ");
+                    Console.WriteLine(Withdraw(Amountwithdraw));
+                    Main();
+                    break;
+                case 3:
+                    Console.Clear();
+                    Console.WriteLine("Please enter the amount to be deposited");
+                    decimal Amountdeposited = Convert.ToDecimal(Console.ReadLine());
+                    Console.Write("your Balance is : ");
+                    Console.WriteLine(Deposit(Amountdeposited));
+                    Main();
+                    break;
+                case 4:
+                    Console.WriteLine("thank you for using MYBANK -_ - ");
+                    break;
+                default:
+                    throw new Exception(" Invalid number... Please choose the number of the operation ");
+            }
+            
         }
 
         public static decimal ViewBalance()
@@ -26,44 +65,43 @@ namespace ATM
             
             return Balance;
         }
-        public static decimal Withdraw()
+        public static decimal Withdraw(decimal Amount)
         {
-            Console.WriteLine("Please enter the amount to be withdrawn");
-            String amountwithdraw = Console.ReadLine();
-            decimal Amountwithdraw = Convert.ToDecimal(amountwithdraw);
+            //Console.WriteLine("Please enter the amount to be withdrawn");
+           //decimal Amountwithdraw = Convert.ToDecimal(Console.ReadLine());
             try
             {
-                if (Amountwithdraw < 0)
+                if (Amount < 1)
                 {
-                    throw new Exception($"opps the {Amountwithdraw} is lees then zero");
+                    throw new Exception($"opps the {Amount} is lees then one");
 
                 }
-                if (Amountwithdraw > Balance)
+                if (Amount > Balance)
                 {
-                    throw new Exception($"opps the {Amountwithdraw} is bigger than {Balance} ");
+                    throw new Exception($"opps the {Amount} is bigger than {Balance} ");
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
-            Balance -=  Amountwithdraw;
-               
+            Balance -=  Amount;
+           // Console.Write("your Balance is : ");
+
 
             return Balance;
         }
-        public static decimal Deposit()
+        public static decimal Deposit(decimal Amount)
         {
-            Console.WriteLine("Please enter the amount to be deposited");
-            String amountDeposit = Console.ReadLine();
-            decimal AmountDeposit = Convert.ToDecimal(amountDeposit);
+            //Console.WriteLine("Please enter the amount to be deposited");
+           // decimal Amount = Convert.ToDecimal(Console.ReadLine());
             try
             {
 
             
-            if (AmountDeposit < 0) 
+            if (Amount < 1) 
             {
-                throw new Exception($"opps the {AmountDeposit} is lees then zero");
+                throw new Exception($"opps the {Amount} is lees then one");
                 
             }
             }
@@ -71,8 +109,13 @@ namespace ATM
             {
                 Console.WriteLine(e);
             }
-            Balance += AmountDeposit;
+            Balance += Amount;
             return Balance;
+
         }
+        
+
+
+
     }
 }
