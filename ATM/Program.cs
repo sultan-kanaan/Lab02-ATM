@@ -40,16 +40,18 @@ namespace ATM
                     Console.Clear();
                     Console.WriteLine("Please enter the amount to be withdrawn");
                     decimal Amountwithdraw = Convert.ToDecimal(Console.ReadLine());
-                    Console.Write("your Balance is : ");
-                    Console.WriteLine(Withdraw(Amountwithdraw));
+                    Withdraw(Amountwithdraw);
+                    Console.WriteLine("your Balance is : " + Balance);
+
                     Main();
                     break;
                 case 3:
                     Console.Clear();
                     Console.WriteLine("Please enter the amount to be deposited");
                     decimal Amountdeposited = Convert.ToDecimal(Console.ReadLine());
-                    Console.Write("your Balance is : ");
-                    Console.WriteLine(Deposit(Amountdeposited));
+                    Deposit(Amountdeposited);
+                    Console.WriteLine("your Balance is : " + Balance);
+
                     Main();
                     break;
                 case 4:
@@ -70,22 +72,20 @@ namespace ATM
         {
             //Console.WriteLine("Please enter the amount to be withdrawn");
            //decimal Amountwithdraw = Convert.ToDecimal(Console.ReadLine());
-            try
-            {
                 if (Amount < 1)
                 {
-                    throw new Exception($"opps the {Amount} is lees then one");
+                    Console.WriteLine($"opps the {Amount} is lees then one");
+                    Main();
 
-                }
-                if (Amount > Balance)
+            }
+            if (Amount > Balance)
                 {
-                    throw new Exception($"opps the {Amount} is bigger than {Balance} ");
-                }
+                   Console.WriteLine($"opps the {Amount} is bigger than {Balance} ");
+                   Main();
+
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+
+
             Balance -=  Amount;
            // Console.Write("your Balance is : ");
 
@@ -96,20 +96,13 @@ namespace ATM
         {
             //Console.WriteLine("Please enter the amount to be deposited");
            // decimal Amount = Convert.ToDecimal(Console.ReadLine());
-            try
-            {
-
             
             if (Amount < 1) 
             {
-                throw new Exception($"opps the {Amount} is lees then one");
-                
+                Console.WriteLine($"opps the {Amount} is lees then one");
+                Main();
             }
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            
             Balance += Amount;
             return Balance;
 
